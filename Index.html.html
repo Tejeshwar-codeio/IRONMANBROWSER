@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json"> <!-- Web extension shortcut -->
+</head>
+<body>
+    <div class="shortcut-menu">
+        <h3>Quick Shortcuts</h3>
+        <ul>
+            <li><a href="https://www.google.com" target="_blank">Google</a></li>
+            <li><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
+            <li><a href="https://www.github.com" target="_blank">GitHub</a></li>
+            <li><a href="https://www.jervis.com" target="_blank">Jervis</a></li>
+        </ul>
+        <button id="open-tabs">Open 10 Tabs</button>
+    </div>
+    <div class="auth-screens" id="auth-screens">
+        <h3>Login</h3>
+        <form id="login-form" action="/login" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        // Check if the user is logged in
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+        // Show login screen if not logged in
+        if (!isLoggedIn) {
+            document.getElementById('auth-screens').style.display = 'block';
+        } else {
+            document.getElementById('auth-screens').style.display = 'none';
+        }
+
+        // Handle login form submission
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Simulate login success
+            localStorage.setItem('isLoggedIn', 'true');
+            alert('Login successful!');
+            document.getElementById('auth-screens').style.display = 'none';
+        });
+
+        // Simulate logout for testing
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            alert('Logged out!');
+            location.reload();
+        }
+
+        // Open 10 tabs shortcut
+        document.getElementById('open-tabs').addEventListener('click', function () {
+            const urls = [
+                "https://www.google.com",
+                "https://www.youtube.com",
+                "https://www.github.com",
+                "https://www.jervis.com",
+                "https://www.wikipedia.org",
+                "https://www.stackoverflow.com",
+                "https://www.reddit.com",
+                "https://www.twitter.com",
+                "https://www.facebook.com",
+                "https://www.linkedin.com"
+            ];
+            urls.forEach(url => window.open(url, '_blank'));
+        });
+    </script>
+    <style>
+        .shortcut-menu {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .shortcut-menu h3 {
+            color: #ffcc00; /* Gold text */
+            text-shadow: 1px 1px 3px #f0131e; /* Red glow */
+        }
+        .shortcut-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .shortcut-menu li {
+            display: inline;
+            margin: 0 10px;
+        }
+        .shortcut-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .shortcut-menu a:hover {
+            color: #ffcc00; /* Gold hover effect */
+        }
+        .shortcut-menu button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #f0131e, #ffcc00); /* Hybrid button gradient */
+            color: white;
+            cursor: pointer;
+        }
+        .shortcut-menu button:hover {
+            background: linear-gradient(135deg, #d0111b, #e6b800); /* Darker hybrid gradient */
+        }
+        .auth-screens {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .auth-screens h3 {
+            color: #ffcc00; /* Gold text */
+            text-shadow: 1px 1px 3px #f0131e; /* Red glow */
+        }
+        .auth-screens form {
+            margin: 10px 0;
+        }
+        .auth-screens input {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ffcc00; /* Gold border */
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1); /* Transparent input background */
+            color: white;
+        }
+        .auth-screens button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #f0131e, #ffcc00); /* Hybrid button gradient */
+            color: white;
+            cursor: pointer;
+        }
+        .auth-screens button:hover {
+            background: linear-gradient(135deg, #d0111b, #e6b800); /* Darker hybrid gradient */
+        }
+    </style>
+</body>
+</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON MAN Hybrid Search Engine</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/e/e0/Iron_Man_bleeding_edge.jpg" type="image/x-icon">
+    <meta name="theme-color" content="#f0131e"> <!-- Sets the browser's address bar color -->
+    <meta name="description" content="Iron Man-themed hybrid search engine powered by Google.">
+    <meta name="keywords" content="Iron Man, search engine, Google, superhero theme, hybrid UI">
+    <meta name="author" content="Your Name">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(28, 28, 28, 0.8), rgba(240, 19, 30, 0.8)); /* Hybrid gradient background with blur effect */
+            backdrop-filter: blur(10px); /* Light blur effect */
+            color: #ffffff; /* White text for better contrast */
+        }
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffcc00; /* Gold text */
+            text-shadow: 2px 2px 5px #f0131e; /* Red glow */
+        }
+        .search-box {
+            margin-top: 20px;
+        }
+        .search-box input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ffcc00; /* Gold border */
+            border-radius: 24px;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.1); /* Transparent input background */
+            color: white;
+        }
+        .search-box button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-left: 10px;
+            border: none;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #f0131e, #ffcc00); /* Hybrid button gradient */
+            color: white;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px #000; /* Subtle shadow */
+        }
+        .search-box button:hover {
+            background: linear-gradient(135deg, #d0111b, #e6b800); /* Darker hybrid gradient */
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">Iron Man Hybrid Search</div>
+    <div class="search-box">
+        <form action="https://www.google.com/search" method="get">
+            <input type="text" name="q" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>
